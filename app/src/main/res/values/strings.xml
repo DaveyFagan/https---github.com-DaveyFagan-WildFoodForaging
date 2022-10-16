@@ -2,4 +2,6 @@
     <string name="app_name">Wild Food Foraging</string>
     <string name="button_addPlant">Add Plant</string>
     <string name="hint_plantName">Common Plant Name</string>
+    <string name="hint_plantScientificName">Scientific Plant Name</string>
+    <string name="hint_plantDatePicked">Date Picked</string>
 </resources>
