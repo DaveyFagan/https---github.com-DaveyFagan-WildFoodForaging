@@ -1,15 +1,20 @@
-package org.wit.foraging
+package org.wit.foraging.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import org.wit.foraging.databinding.ActivityForagingBinding
+import org.wit.foraging.models.ForagingModel
 import timber.log.Timber
 import timber.log.Timber.i
 
-private lateinit var binding: ActivityForagingBinding
 
 class ForagingActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityForagingBinding
+    var foraging = ForagingModel()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityForagingBinding.inflate(layoutInflater)
@@ -18,11 +23,11 @@ class ForagingActivity : AppCompatActivity() {
         i("Foraging Activity started..")
 
         binding.btnAdd.setOnClickListener() {
-            val plantName = binding.foragingPlantName.text.toString()
-            val plantScientificName = binding.foragingPlantScientificName.text.toString()
-            val datePicked = binding.foragingDatePicked.text.toString()
-            if (plantName.isNotEmpty() and plantScientificName.isNotEmpty() and datePicked.isNotEmpty()) {
-                i("add Button Pressed: $plantName $plantScientificName $datePicked")
+            foraging.name = binding.foragingPlantName.text.toString()
+            foraging.scientificName = binding.foragingPlantScientificName.text.toString()
+            foraging.datePicked = binding.foragingDatePicked.text.toString()
+            if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
+                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
             }
             else {
                 Snackbar
