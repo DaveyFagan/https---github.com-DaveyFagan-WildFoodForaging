@@ -27,7 +27,7 @@ class ForagingActivity : AppCompatActivity() {
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
             if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
-                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
+                i("add Button Pressed: ${foraging.name} ${foraging.scientificName} ${foraging.datePicked}")
             }
             else {
                 Snackbar
