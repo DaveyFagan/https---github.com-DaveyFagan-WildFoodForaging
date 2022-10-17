@@ -13,5 +13,8 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Foraging app started")
+        foragingList.add(ForagingModel("One", "About one...", "sdfasad"))
+        foragingList.add(ForagingModel("Two", "About two...", "sdhfiod"))
+        foragingList.add(ForagingModel("Three", "About three...", "klsdjfk"))
     }
 }

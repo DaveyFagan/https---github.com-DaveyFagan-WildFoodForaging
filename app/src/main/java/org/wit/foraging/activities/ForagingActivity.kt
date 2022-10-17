@@ -21,6 +21,7 @@ class ForagingActivity : AppCompatActivity() {
         binding = ActivityForagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        app = application as MainApp
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
@@ -30,6 +31,8 @@ class ForagingActivity : AppCompatActivity() {
                 i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
                 for (i in app.foragingList.indices)
                 { i("Foraged food[$i]:${this.app.foragingList[i]}") }
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
@@ -37,7 +40,5 @@ class ForagingActivity : AppCompatActivity() {
                     .show()
             }
         }
-
-
     }
 }

@@ -4,24 +4,23 @@
     package="org.wit.foraging">
 
     <application
-        android:name="org.wit.foraging.main.MainApp"
+        android:name=".main.MainApp"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Foraging"
-        tools:targetApi="31">
+        android:theme="@style/Theme.Foraging">
         <activity
-            android:name=".activities.ForagingActivity"
+            android:name=".activities.ForagingListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ForagingActivity">
         </activity>
     </application>
 

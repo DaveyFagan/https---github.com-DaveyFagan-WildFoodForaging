@@ -4,4 +4,6 @@
     <string name="hint_plantName">Common Plant Name</string>
     <string name="hint_plantScientificName">Scientific Plant Name</string>
     <string name="hint_plantDatePicked">Date Picked</string>
+    <string name="menu_addForaging">Add</string>
+
 </resources>
