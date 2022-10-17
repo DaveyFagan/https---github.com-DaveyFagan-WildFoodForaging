@@ -13,6 +13,7 @@ class ForagingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForagingBinding
     var foraging = ForagingModel()
+    val foragingList = ArrayList<ForagingModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,10 @@ class ForagingActivity : AppCompatActivity() {
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
             if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
-                i("add Button Pressed: ${foraging.name} ${foraging.scientificName} ${foraging.datePicked}")
+                foragingList.add(foraging.copy())
+                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
+                for (i in foragingList.indices)
+                { i("Foraged food[$i]:${this.foragingList[i]}") }
             }
             else {
                 Snackbar
