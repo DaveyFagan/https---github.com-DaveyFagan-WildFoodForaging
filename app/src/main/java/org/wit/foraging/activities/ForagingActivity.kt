@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import org.wit.foraging.databinding.ActivityForagingBinding
+import org.wit.foraging.main.MainApp
 import org.wit.foraging.models.ForagingModel
-import timber.log.Timber
 import timber.log.Timber.i
 
 
@@ -13,25 +13,23 @@ class ForagingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForagingBinding
     var foraging = ForagingModel()
-    val foragingList = ArrayList<ForagingModel>()
+    lateinit var app: MainApp
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityForagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Timber.plant(Timber.DebugTree())
-        i("Foraging Activity started..")
 
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
             if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
-                foragingList.add(foraging.copy())
+                app.foragingList.add(foraging.copy())
                 i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
-                for (i in foragingList.indices)
-                { i("Foraged food[$i]:${this.foragingList[i]}") }
+                for (i in app.foragingList.indices)
+                { i("Foraged food[$i]:${this.app.foragingList[i]}") }
             }
             else {
                 Snackbar
