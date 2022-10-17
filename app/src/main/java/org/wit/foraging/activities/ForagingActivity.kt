@@ -2,7 +2,10 @@ package org.wit.foraging.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import org.wit.foraging.R
 import org.wit.foraging.databinding.ActivityForagingBinding
 import org.wit.foraging.main.MainApp
 import org.wit.foraging.models.ForagingModel
@@ -20,6 +23,9 @@ class ForagingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.toolbarAdd.title = title
+        setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
         binding.btnAdd.setOnClickListener() {
@@ -40,5 +46,19 @@ class ForagingActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_foraging, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
