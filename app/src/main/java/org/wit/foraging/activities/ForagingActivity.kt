@@ -23,20 +23,24 @@ class ForagingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
-
         app = application as MainApp
+
+        if (intent.hasExtra("foraging_edit")) {
+            foraging = intent.extras?.getParcelable("foraging_edit")!!
+            binding.foragingPlantName.setText(foraging.name)
+            binding.foragingPlantScientificName.setText(foraging.scientificName)
+            binding.foragingDatePicked.setText(foraging.datePicked)
+        }
+
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
             if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
-                app.foragingList.add(foraging.copy())
+                app.foragingList.create(foraging.copy())
                 i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
-                for (i in app.foragingList.indices)
-                { i("Foraged food[$i]:${this.app.foragingList[i]}") }
                 setResult(RESULT_OK)
                 finish()
             }
