@@ -46,7 +46,7 @@ class ForagingActivity : AppCompatActivity() {
             }
             else {
                 Snackbar
-                    .make(it,"Please Fill Out All Fields", Snackbar.LENGTH_LONG)
+                    .make(it,R.string.enter_all_fields, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
