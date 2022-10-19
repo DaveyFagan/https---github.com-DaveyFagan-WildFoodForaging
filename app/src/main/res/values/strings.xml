@@ -7,4 +7,5 @@
     <string name="menu_addForaging">Add</string>
     <string name="menu_cancelForaging">Cancel</string>
     <string name="enter_all_fields">Please Fill Out All Fields</string>
+    <string name="save_foraging"> Save Foraging </string>
 </resources>

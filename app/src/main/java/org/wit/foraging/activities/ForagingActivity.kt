@@ -32,6 +32,7 @@ class ForagingActivity : AppCompatActivity() {
             binding.foragingPlantName.setText(foraging.name)
             binding.foragingPlantScientificName.setText(foraging.scientificName)
             binding.foragingDatePicked.setText(foraging.datePicked)
+            binding.btnAdd.setText(R.string.save_foraging)
         }
 
         binding.btnAdd.setOnClickListener() {
