@@ -26,8 +26,10 @@ class ForagingActivity : AppCompatActivity() {
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
+        var edit = false
 
         if (intent.hasExtra("foraging_edit")) {
+            edit = true
             foraging = intent.extras?.getParcelable("foraging_edit")!!
             binding.foragingPlantName.setText(foraging.name)
             binding.foragingPlantScientificName.setText(foraging.scientificName)
@@ -39,17 +41,20 @@ class ForagingActivity : AppCompatActivity() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
-            if (foraging.name.isNotEmpty() and foraging.scientificName.isNotEmpty() and foraging.datePicked.isNotEmpty()) {
-                app.foragingList.create(foraging.copy())
-                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
+            if (foraging.name.isEmpty() and foraging.scientificName.isEmpty() and foraging.datePicked.isEmpty()) {
                 Snackbar
-                    .make(it,R.string.enter_all_fields, Snackbar.LENGTH_LONG)
+                    .make(it, R.string.enter_all_fields, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.foragingList.update(foraging.copy())
+                } else {
+                    app.foragingList.create(foraging.copy())
+                }
             }
+            i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
+            setResult(RESULT_OK)
+            finish()
         }
     }
 
