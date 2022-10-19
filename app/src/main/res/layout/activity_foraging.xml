@@ -79,6 +79,7 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
+                    android:focusableInTouchMode="false"
                     android:textSize="14sp" />
 
                 <Button

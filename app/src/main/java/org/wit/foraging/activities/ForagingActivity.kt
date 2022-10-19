@@ -11,12 +11,17 @@ import org.wit.foraging.main.MainApp
 import org.wit.foraging.models.ForagingModel
 import timber.log.Timber.i
 
+import android.app.DatePickerDialog
+import android.widget.EditText
+import java.util.*
+
 
 class ForagingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForagingBinding
     var foraging = ForagingModel()
     lateinit var app: MainApp
+    lateinit var dateEdt: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +32,7 @@ class ForagingActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
         var edit = false
+        dateEdt = findViewById(R.id.foragingDatePicked)
 
         if (intent.hasExtra("foraging_edit")) {
             edit = true
@@ -55,6 +61,30 @@ class ForagingActivity : AppCompatActivity() {
             i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
             setResult(RESULT_OK)
             finish()
+        }
+
+
+        dateEdt.setOnClickListener {
+
+            val c = Calendar.getInstance()
+
+
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+
+                this,
+                { view, year, monthOfYear, dayOfMonth ->
+                    val dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                    dateEdt.setText(dat)
+                },
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
         }
     }
 
