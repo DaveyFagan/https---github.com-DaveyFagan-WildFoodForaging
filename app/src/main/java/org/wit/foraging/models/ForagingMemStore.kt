@@ -28,6 +28,7 @@ class ForagingMemStore: ForagingStore {
             foundForaging.name = foraging.name
             foundForaging.scientificName = foraging.scientificName
             foundForaging.datePicked = foraging.datePicked
+            foundForaging.image = foraging.image
             logAll()
         }
     }
