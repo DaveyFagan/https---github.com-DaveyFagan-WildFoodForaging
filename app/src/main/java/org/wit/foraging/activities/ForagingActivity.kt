@@ -13,6 +13,7 @@ import timber.log.Timber.i
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -50,6 +51,9 @@ class ForagingActivity : AppCompatActivity() {
             Picasso.get()
                 .load(foraging.image)
                 .into(binding.foragingImage)
+            if (foraging.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_foraging_image)
+            }
         }
 
 

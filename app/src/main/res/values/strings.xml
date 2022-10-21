@@ -10,5 +10,5 @@
     <string name="save_foraging"> Save Foraging </string>
     <string name="button_addImage"> Add Image </string>
     <string name="select_foraging_image">Select foraging image</string>
-
+    <string name="change_foraging_image">Change image</string>
 </resources>
