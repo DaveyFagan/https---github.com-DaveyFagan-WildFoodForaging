@@ -3,6 +3,7 @@ package org.wit.foraging.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.foraging.databinding.CardForagingBinding
 import org.wit.foraging.models.ForagingModel
 
@@ -34,6 +35,7 @@ class ForagingAdapter constructor(private var foragingList: List<ForagingModel>,
         fun bind(foraging: ForagingModel, listener: ForagingListener) {
             binding.foragingPlantNameTitle.text = foraging.name
             binding.foragingPlantScientificName.text = foraging.scientificName
+            Picasso.get().load(foraging.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onForagingClick(foraging) }
 
         }
