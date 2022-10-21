@@ -12,12 +12,18 @@ import org.wit.foraging.models.ForagingModel
 import timber.log.Timber.i
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.widget.EditText
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.squareup.picasso.Picasso
+import org.wit.foraging.helpers.showImagePicker
 import java.util.*
 
 
 class ForagingActivity : AppCompatActivity() {
 
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var binding: ActivityForagingBinding
     var foraging = ForagingModel()
     lateinit var app: MainApp
@@ -41,7 +47,12 @@ class ForagingActivity : AppCompatActivity() {
             binding.foragingPlantScientificName.setText(foraging.scientificName)
             binding.foragingDatePicked.setText(foraging.datePicked)
             binding.btnAdd.setText(R.string.save_foraging)
+            Picasso.get()
+                .load(foraging.image)
+                .into(binding.foragingImage)
         }
+
+
 
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
@@ -57,10 +68,15 @@ class ForagingActivity : AppCompatActivity() {
                 } else {
                     app.foragingList.create(foraging.copy())
                 }
+                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
+                setResult(RESULT_OK)
+                finish()
             }
-            i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
-            setResult(RESULT_OK)
-            finish()
+        }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
+            showImagePicker(imageIntentLauncher)
         }
 
 
@@ -86,6 +102,9 @@ class ForagingActivity : AppCompatActivity() {
             )
             datePickerDialog.show()
         }
+
+        registerImagePickerCallback()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -101,4 +120,24 @@ class ForagingActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            foraging.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(foraging.image)
+                                .into(binding.foragingImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
 }
