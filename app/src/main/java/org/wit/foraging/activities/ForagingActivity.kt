@@ -58,6 +58,8 @@ class ForagingActivity : AppCompatActivity() {
 
 
 
+
+
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
@@ -137,7 +139,9 @@ class ForagingActivity : AppCompatActivity() {
                             Picasso.get()
                                 .load(foraging.image)
                                 .into(binding.foragingImage)
-                        } // end of if
+                            binding.chooseImage.setText(R.string.change_foraging_image)
+
+                        }
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
