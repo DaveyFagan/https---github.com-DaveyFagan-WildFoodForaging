@@ -19,6 +19,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.squareup.picasso.Picasso
 import org.wit.foraging.helpers.showImagePicker
+import org.wit.foraging.models.Location
 import java.util.*
 
 
@@ -112,7 +113,9 @@ class ForagingActivity : AppCompatActivity() {
 
         binding.foragingLocation.setOnClickListener {
             i ("Set Location Pressed")
+            val location = Location(53.45735779196556, -6.23934480331513, 15f)
             val launcherIntent = Intent(this, MapsActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
 
