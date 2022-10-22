@@ -29,6 +29,7 @@ class ForagingActivity : AppCompatActivity() {
     var foraging = ForagingModel()
     lateinit var app: MainApp
     lateinit var dateEdt: EditText
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,9 +112,12 @@ class ForagingActivity : AppCompatActivity() {
 
         binding.foragingLocation.setOnClickListener {
             i ("Set Location Pressed")
+            val launcherIntent = Intent(this, MapsActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
         }
 
         registerImagePickerCallback()
+        registerMapCallback()
 
     }
 
@@ -150,6 +154,12 @@ class ForagingActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 
 }
