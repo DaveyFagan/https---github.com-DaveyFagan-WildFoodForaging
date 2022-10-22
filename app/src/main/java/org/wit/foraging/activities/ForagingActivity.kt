@@ -109,6 +109,10 @@ class ForagingActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
+        binding.foragingLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+
         registerImagePickerCallback()
 
     }
