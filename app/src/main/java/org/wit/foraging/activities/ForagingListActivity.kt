@@ -33,7 +33,7 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ForagingAdapter(app.foragingList.findAll(), this)
+        loadForaging()
 
         registerRefreshCallback()
     }
@@ -55,19 +55,28 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
 
     override fun onForagingClick(foraging: ForagingModel) {
         val launcherIntent = Intent(this, ForagingActivity::class.java)
-        launcherIntent.putExtra("placemark_edit", foraging)
+        launcherIntent.putExtra("foraging_edit", foraging)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        binding.recyclerView.adapter?.notifyDataSetChanged()
-//        super.onActivityResult(requestCode, resultCode, data)
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadForaging() }
+    }
+
+    private fun loadForaging() {
+        showForingList(app.foragingList.findAll())
+    }
+
+    fun showForingList (foragingList: List<ForagingModel>) {
+        binding.recyclerView.adapter = ForagingAdapter(foragingList, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 

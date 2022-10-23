@@ -9,7 +9,10 @@ data class ForagingModel(var id: Long = 0,
                          var name: String = "",
                          var scientificName: String = "",
                          var datePicked: String = "",
-                         var image: Uri = Uri.EMPTY
+                         var image: Uri = Uri.EMPTY,
+                         var lat: Double = 0.0,
+                         var lng: Double = 0.0,
+                         var zoom: Float = 0f
 
 ) : Parcelable
 

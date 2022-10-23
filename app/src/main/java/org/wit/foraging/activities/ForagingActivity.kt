@@ -76,7 +76,6 @@ class ForagingActivity : AppCompatActivity() {
                 } else {
                     app.foragingList.create(foraging.copy())
                 }
-                i("add Button Pressed: $foraging.name $foraging.scientificName $foraging.datePicked")
                 setResult(RESULT_OK)
                 finish()
             }
@@ -113,7 +112,14 @@ class ForagingActivity : AppCompatActivity() {
 
         binding.foragingLocation.setOnClickListener {
             i ("Set Location Pressed")
-            val location = Location(53.45735779196556, -6.23934480331513, 15f)
+            val location =
+                Location(53.45728574193019, -6.238869520651969, 15f)
+
+            if (foraging.zoom != 0f) {
+                location.lat =  foraging.lat
+                location.lng = foraging.lng
+                location.zoom = foraging.zoom
+            }
             val launcherIntent = Intent(this, MapsActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -162,7 +168,21 @@ class ForagingActivity : AppCompatActivity() {
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            foraging.lat = location.lat
+                            foraging.lng = location.lng
+                            foraging.zoom = location.zoom
+                        }
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 
 }
