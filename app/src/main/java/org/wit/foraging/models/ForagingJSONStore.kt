@@ -42,7 +42,18 @@ class ForagingJSONStore(private val context: Context) : ForagingStore {
 
 
     override fun update(foraging: ForagingModel) {
-        // todo
+        var foundForaging: ForagingModel? = foragingList.find { p -> p.id == foraging.id }
+        if (foundForaging != null) {
+            foundForaging.name = foraging.name
+            foundForaging.scientificName = foraging.scientificName
+            foundForaging.datePicked = foraging.datePicked
+            foundForaging.image = foraging.image
+            foundForaging.lat = foraging.lat
+            foundForaging.lng = foraging.lng
+            foundForaging.zoom = foraging.zoom
+            logAll()
+        }
+        serialize()
     }
 
     private fun serialize() {
