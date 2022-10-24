@@ -39,4 +39,8 @@ class ForagingMemStore: ForagingStore {
     fun logAll() {
         foragingList.forEach{ i("${it}") }
     }
+
+    override fun delete(foraging: ForagingModel) {
+        foragingList.remove(foraging)
+    }
 }

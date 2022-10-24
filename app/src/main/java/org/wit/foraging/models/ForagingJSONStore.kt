@@ -56,6 +56,11 @@ class ForagingJSONStore(private val context: Context) : ForagingStore {
         serialize()
     }
 
+    override fun delete(foraging: ForagingModel) {
+        foragingList.remove(foraging)
+        serialize()
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(foragingList, listType)
         write(context, JSON_FILE, jsonString)

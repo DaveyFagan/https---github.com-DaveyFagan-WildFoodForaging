@@ -140,6 +140,10 @@ class ForagingActivity : AppCompatActivity() {
             R.id.item_cancel -> {
                 finish()
             }
+            R.id.item_delete -> {
+                app.foragingList.delete(foraging.copy())
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

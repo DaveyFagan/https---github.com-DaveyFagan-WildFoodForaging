@@ -18,4 +18,6 @@
     <string name="foraging_image_placeholder">Foraging Imagee</string>
     <string name="foraging_title_placeholder">Foraging Title</string>
     <string name="foraging_description_placeholder">Foraging Description</string>
+    <string name="menu_deleteForaging">Delete</string>
+
 </resources>
