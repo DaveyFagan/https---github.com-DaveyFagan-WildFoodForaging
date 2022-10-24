@@ -20,6 +20,7 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityForagingListBinding
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +35,9 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         loadForaging()
-
         registerRefreshCallback()
+        registerMapCallback()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,6 +50,10 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, ForagingActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
+            }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, ForagingMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -68,6 +74,12 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { loadForaging() }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {  }
     }
 
     private fun loadForaging() {

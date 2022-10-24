@@ -14,5 +14,8 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_map">Map</string>
-
+    <string name="title_activity_foraging_maps">Map of All Placemarks </string>
+    <string name="foraging_image_placeholder">Foraging Imagee</string>
+    <string name="foraging_title_placeholder">Foraging Title</string>
+    <string name="foraging_description_placeholder">Foraging Description</string>
 </resources>

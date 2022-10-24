@@ -31,6 +31,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ForagingActivity"></activity>
+        <activity android:name=".activities.ForagingMapsActivity" />
+
     </application>
 
 </manifest>
