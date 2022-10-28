@@ -11,14 +11,25 @@ internal fun getId(): Long {
 class ForagingMemStore: ForagingStore {
 
     val foragingList  = ArrayList<ForagingModel>()
+    val userList  = ArrayList<UserModel>()
 
     override fun findAll(): List<ForagingModel> {
         return foragingList
     }
 
+    override fun findAllUsers(): List<UserModel> {
+        return userList
+    }
+
     override fun create(foraging: ForagingModel) {
         foraging.id = getId()
         foragingList.add(foraging)
+        logAll()
+    }
+
+    override fun createUser(user: UserModel) {
+        user.id = getId()
+        userList.add(user)
         logAll()
     }
 

@@ -19,5 +19,10 @@
     <string name="foraging_title_placeholder">Foraging Title</string>
     <string name="foraging_description_placeholder">Foraging Description</string>
     <string name="menu_deleteForaging">Delete</string>
+    <string name="button_login">Login</string>
+    <string name="button_create_user">Create User</string>
+    <string name="button_add_user">Add User</string>
+    <string name="enter_correct_fields">Incorrect fields entered</string>
+
 
 </resources>

@@ -1,6 +1,7 @@
 package org.wit.foraging.helpers
 
 import android.content.Context
+import org.wit.foraging.models.UserModel
 import timber.log.Timber.e
 import java.io.*
 

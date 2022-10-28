@@ -22,7 +22,7 @@
             android:exported="true"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".activities.ForagingListActivity"
+            android:name=".activities.ForagingLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".activities.ForagingActivity"></activity>
         <activity android:name=".activities.ForagingMapsActivity" />
+        <activity android:name=".activities.ForagingListActivity" />
+        <activity android:name=".activities.ForagingUserActivity" />
 
     </application>
 

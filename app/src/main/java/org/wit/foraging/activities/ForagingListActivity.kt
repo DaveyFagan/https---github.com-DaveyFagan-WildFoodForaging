@@ -14,6 +14,7 @@ import org.wit.foraging.adapters.ForagingListener
 import org.wit.foraging.main.MainApp
 import org.wit.foraging.databinding.ActivityForagingListBinding
 import org.wit.foraging.models.ForagingModel
+import timber.log.Timber
 
 class ForagingListActivity : AppCompatActivity(), ForagingListener {
 
@@ -37,6 +38,7 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
         loadForaging()
         registerRefreshCallback()
         registerMapCallback()
+
 
     }
 
@@ -83,10 +85,10 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
     }
 
     private fun loadForaging() {
-        showForingList(app.foragingList.findAll())
+        showForagingList(app.foragingList.findAll())
     }
 
-    fun showForingList (foragingList: List<ForagingModel>) {
+    fun showForagingList (foragingList: List<ForagingModel>) {
         binding.recyclerView.adapter = ForagingAdapter(foragingList, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

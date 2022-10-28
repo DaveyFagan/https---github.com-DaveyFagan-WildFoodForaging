@@ -58,10 +58,6 @@ class ForagingActivity : AppCompatActivity() {
             }
         }
 
-
-
-
-
         binding.btnAdd.setOnClickListener() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()

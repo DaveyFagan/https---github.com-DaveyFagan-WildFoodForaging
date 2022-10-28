@@ -10,10 +10,14 @@ import java.lang.reflect.Type
 import java.util.*
 
 const val JSON_FILE = "foraging.json"
+const val JSON_FILE_USER = "user.json"
+
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
     .create()
 val listType: Type = object : TypeToken<ArrayList<ForagingModel>>() {}.type
+val listTypeUser: Type = object : TypeToken<ArrayList<UserModel>>() {}.type
+
 
 fun generateRandomId(): Long {
     return Random().nextLong()
@@ -22,9 +26,13 @@ fun generateRandomId(): Long {
 class ForagingJSONStore(private val context: Context) : ForagingStore {
 
     var foragingList = mutableListOf<ForagingModel>()
+    var userList = mutableListOf<UserModel>()
 
     init {
         if (exists(context, JSON_FILE)) {
+            deserialize()
+        }
+        if (exists(context, JSON_FILE_USER)) {
             deserialize()
         }
     }
@@ -38,6 +46,17 @@ class ForagingJSONStore(private val context: Context) : ForagingStore {
         foraging.id = generateRandomId()
         foragingList.add(foraging)
         serialize()
+    }
+
+    override fun createUser(user: UserModel) {
+        user.id = generateRandomId()
+        userList.add(user)
+        serialize()
+    }
+
+    override fun findAllUsers(): MutableList<UserModel> {
+        logAllUsers()
+        return userList
     }
 
 
@@ -64,15 +83,23 @@ class ForagingJSONStore(private val context: Context) : ForagingStore {
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(foragingList, listType)
         write(context, JSON_FILE, jsonString)
+        val jsonStringUser = gsonBuilder.toJson(userList, listTypeUser)
+        write(context, JSON_FILE_USER, jsonStringUser)
     }
 
     private fun deserialize() {
         val jsonString = read(context, JSON_FILE)
         foragingList = gsonBuilder.fromJson(jsonString, listType)
+        val jsonStringUser = read(context, JSON_FILE_USER)
+        userList = gsonBuilder.fromJson(jsonStringUser, listTypeUser)
     }
 
     private fun logAll() {
         foragingList.forEach { Timber.i("$it") }
+    }
+
+    private fun logAllUsers() {
+        userList.forEach { Timber.i("$it") }
     }
 }
 

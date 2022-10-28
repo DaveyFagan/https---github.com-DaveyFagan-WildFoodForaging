@@ -16,6 +16,14 @@ data class ForagingModel(var id: Long = 0,
 
 ) : Parcelable
 
+@Parcelize
+data class UserModel(var id: Long = 0,
+                     var username: String = "",
+                     var password: String = "",
+                     var email: String = "",
+
+) : Parcelable
+
 
 @Parcelize
 data class Location(var lat: Double = 0.0,
