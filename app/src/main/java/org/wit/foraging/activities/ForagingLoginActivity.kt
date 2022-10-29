@@ -9,20 +9,32 @@ import org.wit.foraging.databinding.ActivityForagingLoginBinding
 import org.wit.foraging.main.MainApp
 import org.wit.foraging.models.UserModel
 import timber.log.Timber
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.splashscreen.SplashScreen
+import android.view.View
+import android.view.ViewTreeObserver
+
 
 
 class ForagingLoginActivity: AppCompatActivity() {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityForagingLoginBinding
+    var contentHasLoaded = false
 //    private var user = UserModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
-        binding = ActivityForagingLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.toolbar.title = title
-        setSupportActionBar(binding.toolbar)
+//        binding = ActivityForagingLoginBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//        binding.toolbar.title = title
+//        setSupportActionBar(binding.toolbar)
+
+        startLoadingContent()
+        setupSplashScreen(splashScreen)
 
         app = application as MainApp
 
@@ -57,14 +69,29 @@ class ForagingLoginActivity: AppCompatActivity() {
             val launcherIntent = Intent(this, ForagingUserActivity::class.java)
             startActivity(launcherIntent)
         }
+    }
 
-
+    private fun startLoadingContent() {
+        binding = ActivityForagingLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.toolbar.title = title
+        setSupportActionBar(binding.toolbar)
+        contentHasLoaded = true
 
     }
 
-
-
-
-
+    private fun setupSplashScreen(splashScreen: SplashScreen) {
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    return if (contentHasLoaded) {
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else false
+                }
+            }
+        )
+    }
 }
 

@@ -57,6 +57,10 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
                 val launcherIntent = Intent(this, ForagingMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
             }
+            R.id.item_logout -> {
+                val launcherIntent = Intent(this, ForagingLoginActivity::class.java)
+                refreshIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

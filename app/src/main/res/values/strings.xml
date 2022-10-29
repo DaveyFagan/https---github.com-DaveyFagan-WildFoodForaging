@@ -5,6 +5,8 @@
     <string name="hint_plantScientificName">Scientific Plant Name</string>
     <string name="hint_plantDatePicked">Date Picked</string>
     <string name="menu_addForaging">Add</string>
+    <string name="menu_mapForaging">Map</string>
+    <string name="menu_logoutForaging">Logout</string>
     <string name="menu_cancelForaging">Cancel</string>
     <string name="enter_all_fields">Please Fill Out All Fields</string>
     <string name="save_foraging"> Save Foraging </string>
