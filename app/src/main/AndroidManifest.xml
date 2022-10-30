@@ -23,15 +23,15 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".activities.ForagingLoginActivity"
-            android:theme="@style/Theme.App.Starting"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ForagingActivity"></activity>
+        <activity android:name=".activities.ForagingActivity" />
         <activity android:name=".activities.ForagingMapsActivity" />
         <activity android:name=".activities.ForagingListActivity" />
         <activity android:name=".activities.ForagingUserActivity" />
