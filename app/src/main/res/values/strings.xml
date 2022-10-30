@@ -9,6 +9,7 @@
     <string name="menu_logoutForaging">Logout</string>
     <string name="menu_cancelForaging">Cancel</string>
     <string name="enter_all_fields">Please Fill Out All Fields</string>
+    <string name="incorrect_info_fields">Incorrect Details Entered</string>
     <string name="save_foraging"> Save Foraging </string>
     <string name="button_addImage"> Add Image </string>
     <string name="select_foraging_image">Select foraging image</string>

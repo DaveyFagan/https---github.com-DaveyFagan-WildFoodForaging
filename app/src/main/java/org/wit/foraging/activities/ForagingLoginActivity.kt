@@ -50,7 +50,7 @@ class ForagingLoginActivity : AppCompatActivity() {
                         finish()
                     } else {
                         Snackbar
-                            .make(it, R.string.enter_correct_fields, Snackbar.LENGTH_LONG)
+                            .make(it, R.string.incorrect_info_fields, Snackbar.LENGTH_LONG)
                             .show()
                     }
                 }

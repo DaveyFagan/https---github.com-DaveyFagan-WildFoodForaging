@@ -29,16 +29,18 @@ class ForagingUserActivity : AppCompatActivity() {
             user.username = binding.createUsername.text.toString()
             user.email = binding.createEmail.text.toString()
             user.password = binding.createPassword.text.toString()
-            if (user.username.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()) {
-                Timber.i("You added ${user.username}, ${user.email}, ${user.password}")
-                app.userList.createUser(user.copy())
-            } else {
+            if (user.username.isEmpty() or user.email.isEmpty() or user.password.isEmpty()) {
                 Snackbar
                     .make(it, R.string.enter_all_fields, Snackbar.LENGTH_LONG)
                     .show()
+
+            } else {
+                Timber.i("You added ${user.username}, ${user.email}, ${user.password}")
+                app.userList.createUser(user.copy())
+                setResult(RESULT_OK)
+                finish()
             }
-            setResult(RESULT_OK)
-            finish()
+
         }
 
 

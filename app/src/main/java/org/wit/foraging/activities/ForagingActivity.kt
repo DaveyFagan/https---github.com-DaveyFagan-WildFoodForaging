@@ -65,7 +65,7 @@ class ForagingActivity : AppCompatActivity() {
             foraging.name = binding.foragingPlantName.text.toString()
             foraging.scientificName = binding.foragingPlantScientificName.text.toString()
             foraging.datePicked = binding.foragingDatePicked.text.toString()
-            if (foraging.name.isEmpty() and foraging.scientificName.isEmpty() and foraging.datePicked.isEmpty()) {
+            if (foraging.name.isEmpty() or foraging.scientificName.isEmpty() or foraging.datePicked.isEmpty()) {
                 Snackbar
                     .make(it, R.string.enter_all_fields, Snackbar.LENGTH_LONG)
                     .show()
