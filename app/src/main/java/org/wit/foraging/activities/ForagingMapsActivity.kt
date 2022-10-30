@@ -7,7 +7,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.squareup.picasso.Picasso
 import org.wit.foraging.databinding.ActivityForagingMapsBinding
 import org.wit.foraging.databinding.ContentForagingMapsBinding
 import org.wit.foraging.main.MainApp
@@ -24,7 +23,6 @@ class ForagingMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         app = application as MainApp
         binding = ActivityForagingMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
         contentBinding = ContentForagingMapsBinding.bind(binding.root)
         contentBinding.mapView.onCreate(savedInstanceState)

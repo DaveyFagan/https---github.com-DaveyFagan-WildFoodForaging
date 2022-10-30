@@ -1,37 +1,40 @@
 package org.wit.foraging.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
-import org.wit.foraging.R
-import org.wit.foraging.databinding.ActivityForagingBinding
-import org.wit.foraging.main.MainApp
-import org.wit.foraging.models.ForagingModel
-import timber.log.Timber.i
-
-import android.app.DatePickerDialog
-import android.content.Intent
-import android.net.Uri
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import org.wit.foraging.R
+import org.wit.foraging.databinding.ActivityForagingBinding
 import org.wit.foraging.helpers.showImagePicker
+import org.wit.foraging.main.MainApp
+import org.wit.foraging.models.ForagingModel
 import org.wit.foraging.models.Location
+import timber.log.Timber.i
 import java.util.*
-
 
 class ForagingActivity : AppCompatActivity() {
 
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var binding: ActivityForagingBinding
     var foraging = ForagingModel()
     lateinit var app: MainApp
     lateinit var dateEdt: EditText
-    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+    val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,16 +85,22 @@ class ForagingActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
+        binding.takeImage.setOnClickListener {
+            i("Take image")
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(this, "Error: " + e.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
 
         dateEdt.setOnClickListener {
 
             val c = Calendar.getInstance()
-
-
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-
             val datePickerDialog = DatePickerDialog(
 
                 this,
@@ -107,12 +116,12 @@ class ForagingActivity : AppCompatActivity() {
         }
 
         binding.foragingLocation.setOnClickListener {
-            i ("Set Location Pressed")
+            i("Set Location Pressed")
             val location =
                 Location(53.45728574193019, -6.238869520651969, 15f)
 
             if (foraging.zoom != 0f) {
-                location.lat =  foraging.lat
+                location.lat = foraging.lat
                 location.lng = foraging.lng
                 location.zoom = foraging.zoom
             }
@@ -124,6 +133,21 @@ class ForagingActivity : AppCompatActivity() {
         registerImagePickerCallback()
         registerMapCallback()
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            var takenImage = data?.extras?.get("data") as Bitmap
+            MediaStore.Images.Media.insertImage(
+                getContentResolver(),
+                takenImage,
+                "image.jpg",
+                "foraging image"
+            );
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -148,7 +172,7 @@ class ForagingActivity : AppCompatActivity() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
-                when(result.resultCode){
+                when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
@@ -160,7 +184,8 @@ class ForagingActivity : AppCompatActivity() {
 
                         }
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
@@ -173,14 +198,16 @@ class ForagingActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            val location =
+                                result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             foraging.lat = location.lat
                             foraging.lng = location.lng
                             foraging.zoom = location.zoom
                         }
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }

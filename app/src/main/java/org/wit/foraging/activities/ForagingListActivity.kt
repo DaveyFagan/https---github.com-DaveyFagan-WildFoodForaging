@@ -14,14 +14,13 @@ import org.wit.foraging.adapters.ForagingListener
 import org.wit.foraging.main.MainApp
 import org.wit.foraging.databinding.ActivityForagingListBinding
 import org.wit.foraging.models.ForagingModel
-import timber.log.Timber
 
 class ForagingListActivity : AppCompatActivity(), ForagingListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityForagingListBinding
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
-    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,14 +84,14 @@ class ForagingListActivity : AppCompatActivity(), ForagingListener {
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            {  }
+            { }
     }
 
     private fun loadForaging() {
         showForagingList(app.foragingList.findAll())
     }
 
-    fun showForagingList (foragingList: List<ForagingModel>) {
+    fun showForagingList(foragingList: List<ForagingModel>) {
         binding.recyclerView.adapter = ForagingAdapter(foragingList, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

@@ -8,10 +8,10 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class ForagingMemStore: ForagingStore {
+class ForagingMemStore : ForagingStore {
 
-    val foragingList  = ArrayList<ForagingModel>()
-    val userList  = ArrayList<UserModel>()
+    val foragingList = ArrayList<ForagingModel>()
+    val userList = ArrayList<UserModel>()
 
     override fun findAll(): List<ForagingModel> {
         return foragingList
@@ -48,7 +48,7 @@ class ForagingMemStore: ForagingStore {
     }
 
     fun logAll() {
-        foragingList.forEach{ i("${it}") }
+        foragingList.forEach { i("${it}") }
     }
 
     override fun delete(foraging: ForagingModel) {

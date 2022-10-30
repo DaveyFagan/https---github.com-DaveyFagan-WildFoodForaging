@@ -7,7 +7,6 @@ import com.google.android.material.snackbar.Snackbar
 import org.wit.foraging.R
 import org.wit.foraging.databinding.ActivityForagingLoginBinding
 import org.wit.foraging.main.MainApp
-import org.wit.foraging.models.UserModel
 import timber.log.Timber
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.splashscreen.SplashScreen
@@ -15,23 +14,17 @@ import android.view.View
 import android.view.ViewTreeObserver
 
 
-
-class ForagingLoginActivity: AppCompatActivity() {
+class ForagingLoginActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityForagingLoginBinding
     var contentHasLoaded = false
-//    private var user = UserModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
-//        binding = ActivityForagingLoginBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//        binding.toolbar.title = title
-//        setSupportActionBar(binding.toolbar)
 
         startLoadingContent()
         setupSplashScreen(splashScreen)

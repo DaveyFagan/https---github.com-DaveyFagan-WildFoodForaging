@@ -15,7 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.foraging.R
 import org.wit.foraging.models.Location
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener,
+    GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()
@@ -32,6 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         val loc = LatLng(location.lat, location.lng)
+        map.uiSettings.setZoomControlsEnabled(true)
         val options = MarkerOptions()
             .title("Foraging")
             .snippet("GPS : $loc")

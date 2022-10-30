@@ -5,9 +5,9 @@
     <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deleteForaging"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
     <item
         android:id="@+id/item_cancel"
         android:title="@string/menu_cancelForaging"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>

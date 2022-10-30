@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,7 +34,8 @@
             android:layout_marginTop="100dp"
             android:layout_marginEnd="10dp"
             android:hint="Enter Username"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/create_email"
@@ -43,10 +43,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/create_username"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
             android:hint="Enter Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/create_password"
@@ -57,7 +58,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:hint="Enter Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/button_add_newuser"

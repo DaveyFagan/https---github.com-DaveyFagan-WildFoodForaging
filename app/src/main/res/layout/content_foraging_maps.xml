@@ -53,18 +53,18 @@
                 android:layout_width="175dp"
                 android:layout_height="21dp"
                 android:text="@string/foraging_title_placeholder"
-                app:layout_constraintBottom_toTopOf="@+id/currentDescription"
+                app:layout_constraintBottom_toTopOf="@+id/currentScientificName"
                 app:layout_constraintEnd_toStartOf="@+id/currentImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.722" />
 
             <TextView
-                android:id="@+id/currentDescription"
+                android:id="@+id/currentScientificName"
                 android:layout_width="173dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/foraging_description_placeholder"
+                android:text="@string/foraging_scientificName_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/currentImage"
                 app:layout_constraintHorizontal_bias="0.521"

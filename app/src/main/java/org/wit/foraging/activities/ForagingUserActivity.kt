@@ -10,7 +10,7 @@ import org.wit.foraging.models.UserModel
 import timber.log.Timber
 
 
-class ForagingUserActivity: AppCompatActivity() {
+class ForagingUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateUserBinding
     lateinit var app: MainApp
@@ -34,13 +34,12 @@ class ForagingUserActivity: AppCompatActivity() {
                 app.userList.createUser(user.copy())
             } else {
                 Snackbar
-                .make(it, R.string.enter_all_fields, Snackbar.LENGTH_LONG)
-                .show()
+                    .make(it, R.string.enter_all_fields, Snackbar.LENGTH_LONG)
+                    .show()
             }
             setResult(RESULT_OK)
             finish()
         }
-
 
 
     }
